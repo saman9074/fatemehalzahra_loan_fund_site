@@ -10,13 +10,21 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+use Fouladgar\OTP\Concerns\HasOTPNotify;
+use Fouladgar\OTP\Contracts\OTPNotifiable;
+
+class User extends Authenticatable  implements OTPNotifiable
 {
+    use Notifiable;
+    use HasOTPNotify;
+
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +36,7 @@ class User extends Authenticatable
         'family',
         'username',
         'email',
-        'phone',
+        'mobile',
         'password',
         'national_code',
         'post_code',

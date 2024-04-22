@@ -31,8 +31,8 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="phone" value="{{ __('users.phone') }}" />
-                <x-input id="phone" class="block mt-1 w-full" type="number" name="phone" :value="old('phone')" required />
+                <x-label for="mobile" value="{{ __('users.phone') }}" />
+                <x-input id="mobile" class="block mt-1 w-full" type="number" name="mobile" :value="old('mobile')" required />
             </div>
 
             <div class="mt-4">

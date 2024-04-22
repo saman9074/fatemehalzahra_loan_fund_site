@@ -51,4 +51,7 @@ return [
     'home_address' => 'Home address',
     'jobs' => 'job',
     'work_address' => 'Work address',
+    'sendCode' => 'Send code',
+    'verify' => 'Mobile number verification',
+    'verify_code' => 'Verify Code',
 ];

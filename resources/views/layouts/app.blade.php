@@ -10,14 +10,14 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+        <link href={{ URL::asset('css/fts.css') }}  rel="stylesheet">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased" dir="{{(App::isLocale('fa') ? 'rtl' : 'ltr')}}">
         <x-banner />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -34,6 +34,12 @@
 
             <!-- Page Content -->
             <main>
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
                 {{ $slot }}
             </main>
         </div>

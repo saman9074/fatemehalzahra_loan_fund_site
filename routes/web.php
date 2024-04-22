@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Middleware\checkLogin;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,5 +16,29 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('dashboard') ->middleware(checkLogin::class);
 });
+
+//if (Auth::user()) {
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/verify', function () {
+            return view('verify');
+        })->name('verify')->middleware(checkLogin::class);
+
+        Route::get('/verify-otp', function () {
+            return view('verify_otp');
+        })->name('verifyOTP')->middleware(checkLogin::class);
+
+        Route::post('/send-otp', 'sendOTP')->name('sendOTP');
+        Route::post('/validate-otp', 'verifyOTPAndLogin')->name('checkOTP');
+    });
+//}else{
+        //Route::get('/verify', function () {
+            //return redirect('/login')->with('error', 'Please login to verify your account.');
+        //});
+
+        //Route::get('/verify-otp', function () {
+            return redirect('login')->with('error', 'Please login to verify your account.');
+        //});
+//}
+

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('jobs')->nullable()->after('home_address');
             $table->text('work_address')->nullable()->after('jobs');
             $table->string('username')->unique()->after('email');
-            $table->string('phone')->unique()->after('username');
+           // $table->string('mobile')->unique()->after('username');
 
         });
     }
