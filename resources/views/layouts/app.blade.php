@@ -34,13 +34,21 @@
 
             <!-- Page Content -->
             <main>
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
+                @if (session('success'))
+                    <div class="success-msg">
+                        <i class="fa fa-check"></i>
+                        {{ session('success') }}
                     </div>
                 @endif
 
-                {{ $slot }}
+                    @if (session('error_msg'))
+                        <div class="error-msg">
+                            <i class="fa fa-times-circle"></i>
+                        {{ session('error_msg')}}
+                    </div>
+                @endif
+
+            {{ $slot }}
             </main>
         </div>
 

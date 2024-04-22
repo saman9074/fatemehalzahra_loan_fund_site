@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Fouladgar\OTP\Exceptions\InvalidOTPTokenException;
 use Fouladgar\OTP\OTPBroker as OTPService;
 use Illuminate\Http\JsonResponse;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Throwable;
+use Update_Mobile_Verify;
 
 class AuthController
 {
@@ -30,11 +32,11 @@ class AuthController
             } catch (Throwable $ex) {
                 // or return a view.
                 //return response()->json(['message' => 'An Occurred unexpected error.' . $ex], 500);
-                return redirect()->route('verify')->withErrors(['msg' => 'An Occurred unexpected error.']);
+                return redirect()->route('verify')->with(['error_msg' => 'An Occurred unexpected error.']);
             }
 
             //return response()->json(['message' => 'A token sent to:' . $user->mobile]);
-            return redirect()->route('verifyOTP')->with(['status' => 'A token sent to:' . $user->mobile]);
+            return redirect()->route('verifyOTP')->with(['success' => 'A token sent to:' . $user->mobile]);
         }else{
             return redirect('login');
         }
@@ -54,17 +56,20 @@ class AuthController
                 //$request->user()->get('mobile')
                 $userInfo = Auth::user();
                 $user = $this->OTPService->validate($userInfo->mobile, $request->verify_code );
-
+                $userInfo->forceFill([
+                    'mobile_verified_at' => Carbon::now()->timestamp
+                ])->save();
                 // and do login actions (session base or token base) ...
 
+
             } catch (InvalidOTPTokenException $exception) {
-                return Redirect::back()->with(['status' => $exception->getMessage(). ' || ' . $exception->getCode()]);//response()->json(['error' => $exception->getMessage()], $exception->getCode());
+                return redirect()->route('verify')->with(['error_msg' => $exception->getMessage(). ' || ' . $exception->getCode()]);//response()->json(['error' => $exception->getMessage()], $exception->getCode());
             } catch (Throwable $ex) {
-                return Redirect::back()->with(['status' => 'An Occurred unexpected error.' . $ex]);// return response()->json(['message' => 'An Occurred unexpected error.' . $ex], 500);
+                return Redirect::back()->with(['error_msg' => 'An Occurred unexpected error.' . $ex]);// return response()->json(['message' => 'An Occurred unexpected error.' . $ex], 500);
             }
 
             //return response()->json(['message' => 'verify has been successfully.']);
-            return redirect()->route('dashboard')->with(['status' => 'verify has been successfully.']);
+            return redirect()->route('dashboard')->with(['success' => 'verify has been successfully.']);
         }else{
             return redirect('login');
         }

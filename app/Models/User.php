@@ -75,6 +75,7 @@ class User extends Authenticatable  implements OTPNotifiable
     {
         return [
             'email_verified_at' => 'datetime',
+            'mobile_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }

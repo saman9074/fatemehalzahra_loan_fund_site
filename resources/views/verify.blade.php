@@ -14,7 +14,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="mobile">{{ __('users.phone') }}</label>
-                            <x-input id="mobile" type="text" class="mt-1 block w-full" value="{{ Auth::user()->mobile }}" required autocomplete="mobile" disabled />
+                            <x-input name="mobile" id="mobile" type="text" class="mt-1 block w-full" value="{{ Auth::user()->mobile }}" required autocomplete="mobile" disabled />
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary">{{ __('users.sendCode') }}</button>

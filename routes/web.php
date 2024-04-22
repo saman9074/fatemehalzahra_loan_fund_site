@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\checkLogin;
+use App\Http\Middleware\checkMobileVerify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard') ->middleware(checkLogin::class);
+    })->name('dashboard')->middleware([checkLogin::class , checkMobileVerify::class]);
 });
 
 //if (Auth::user()) {
