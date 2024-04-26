@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Fouladgar\OTP\Notifications\Messages\OTPMessage;
+use Fouladgar\OTP\Notifications\OTPNotification;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,5 +22,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        OTPNotification::toSMSUsing(fn($notifiable, $token) =>(new OTPMessage())
+            ->to($notifiable->mobile)
+            ->content($token));
     }
 }

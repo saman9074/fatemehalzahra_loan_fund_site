@@ -54,4 +54,9 @@ return [
     'sendCode' => 'Send code',
     'verify' => 'Mobile number verification',
     'verify_code' => 'Verify Code',
+    'User Information' => 'User Information',
+    'Account number'   => 'Account number:',
+    'Account balance' => 'Account balance:',
+    'Avatar' => 'Avatar',
+    'name:' => 'name:',
 ];

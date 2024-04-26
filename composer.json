@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "fouladgar/laravel-otp": "^4.2",
+        "ippanel/php-rest-sdk": "^2.0",
         "laravel/framework": "^11.0",
         "laravel/jetstream": "^5.0",
         "laravel/sanctum": "^4.0",
