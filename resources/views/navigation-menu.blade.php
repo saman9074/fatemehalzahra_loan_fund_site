@@ -16,6 +16,24 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('bank-accounts.create') }}" :active="request()->routeIs('bank-accounts.create')">
+                        {{ __('Create accounts') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('bank-accounts.offline-deposit') }}" :active="request()->routeIs('bank-accounts.offline-deposit')">
+                        {{ __('Make offline deposit') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('bank-accounts.internal-transfer') }}" :active="request()->routeIs('bank-accounts.internal-transfer')">
+                        {{ __('Internal transfer') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
