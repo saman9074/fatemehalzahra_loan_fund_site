@@ -11,13 +11,13 @@
     @csrf
 
     <div class="form-group">
-        <label for="source_account">شماره حساب یا کارت مبدا:</label>
-        <input type="text" name="source_account" id="source_account">
+        <label for="origin_card_number">شماره حساب یا کارت مبدا:</label>
+        <input type="text" name="origin_card_number" id="origin_card_number">
     </div>
 
     <div class="form-group">
-        <label for="destination_account">شماره حساب یا کارت مقصد:</label>
-        <input type="text" name="destination_account" id="destination_account">
+        <label for="destination_card_number">شماره حساب یا کارت مقصد:</label>
+        <input type="text" name="destination_card_number" id="destination_card_number">
     </div>
 
     <div class="form-group">
@@ -28,6 +28,15 @@
     <div class="form-group">
         <label for="deposit_time">زمان واریزی:</label>
         <input data-jdp name="deposit_time" id="deposit_time">
+    </div>
+
+    <div class="form-group">
+        <label for="tracking_number">شماره پیگیری:</label>
+        <input type="text" name="tracking_number" id="tracking_number">
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="user_id" id="user_id" value="{{Auth::user()->id}}" hidden>
     </div>
 
     <button type="submit">انجام عملیات واریز وجه</button>
