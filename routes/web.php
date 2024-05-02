@@ -4,6 +4,7 @@ use App\Actions\sms_api\ippanel\ippanel_connector;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\FinancialTransactionController;
+use App\Http\Controllers\LoanRequestsController;
 use App\Http\Controllers\OfflineDepositController;
 use App\Http\Middleware\checkLogin;
 use App\Http\Middleware\checkMobileVerified;
@@ -79,4 +80,10 @@ Route::controller(OfflineDepositController::class)->group(function () {
     Route::get('/bank-accounts/offline-deposit', 'offline_deposit')->name('bank-accounts.offline-deposit');
 
     Route::get('/bank-accounts/offline-deposit-list', 'offline_deposit_list')->name('bank-accounts.offline-deposit-list');
+});
+
+Route::controller(LoanRequestsController::class)->group(function () {
+    Route::get('/loan-requests/create', 'loanRequestForm')->name('loan-requests.create');
+    Route::post('/loan-requests/create/store', 'store')->name('loan-requests.store');
+    Route::get('/loan-requests/list', 'loan_requests_list')->name('loan-requests.list');
 });
